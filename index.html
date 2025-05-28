@@ -1,0 +1,246 @@
+<!DOCTYPE html><html lang="en" class="bg-black text-white"><head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#000" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';" />
+<title>Ξ‑Shroomtop420® v10 | Full Key Reference (15‑page)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>body{font-family:monospace}button:active{transform:scale(0.95)}</style>
+</head>
+<body class="p-4">
+<h1 class="text-2xl text-emerald-400 font-bold text-center mb-4">Ξ‑Shroomtop420® 15‑Layer Key Layout</h1>
+<input id="search" placeholder="Search all keys..." class="w-full p-2 mb-4 rounded bg-zinc-900 text-sm" />
+<div id="layout" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"></div>
+<script>
+const pages=[
+  {label:"PromptOps",keys:["/inject","/rewrite","/compress","/summarize","Ξ:","→","::","#prompt","'''","/refactor","/dream","/analyze","/flatten","/log","/expand","/optimize","/state","/version","/trace","/ask","/output","/todo","/resume","/notes","/fork","/goal","/scope","/summary","/context","/deploy","/plan","/export","/log","/compare","/eval","/history","/reduce","/flatmap","/inspect","/args","/script","/self","/recurse","/think","/show","/why","/how","/alt","/next"]},
+  {label:"Shell",keys:["ls","cd","cd ..","pwd","mkdir","touch","rm","rm -rf","cp","mv","chmod +x","chown","cat","less","tail -f","grep","find","locate","tree","stat","df -h","du -sh","tar -xvzf","zip","unzip","curl","wget","ping","traceroute","whoami","sudo","su","env","export","set","alias","source","history","clear","uptime","top","htop","kill","killall","ps aux","xargs","cut","awk","sed","tee"]},
+  {label:"Code Symbols",keys:["(",")","{","}","[","]","<",">","::","=>","=","==","===","!=","!==","+","-","*","/","%","++","--","**","//","&","&&","|","||","!","~","^","<<",">>","?",":",";",",",".","...","`","'","\", "#","@","$","_","->","::=","::=="]},
+  {label:"Numeric + Calc",keys:["0","1","2","3","4","5","6","7","8","9","∞","±","≠","≈","≥","≤","π","√","∑","∫","÷","×","/","%","+","-","e","mod","^","**",".5",".25",".75","⅓","⅔","¼","½","¾","⅛","⅜","⅝","⅞","log","ln","sin","cos","tan","rand","floor","ceil"]},
+  {label:"Markdown",keys:["#","##","###","####","---","**bold**","_italics_","~~strike~~","`code`","```block```",">","[text](url)","![img](src)","- ","* ","1. ","- [ ]","✓","↩","→","←","↑","↓","🔗","📎","📄","📦","📝","🧠","📌","📋","📚","📖","🧾","🗂️","📅","🖊️","📍","📑","🗒️","🧷","🖋️","📇"]},
+  {label:"Clipboard",keys:["⧉ paste","⧉ copy","UUIDv4()","SHA256()","LICENSE.txt","promptmeta.json","manifest.json",".shortcuts","README.txt","VERSION.txt","~/","/sdcard/","/data/data/","~/.zshrc","~/.bashrc","~/.gitconfig","/etc/passwd","/etc/hosts","/tmp/","cat .env","echo $PATH","chmod 755","ln -s","rsync -av","scp","ssh","curl -O","tail -n 50","logcat","top -m 10","termux-clipboard-get","termux-clipboard-set","termux-toast","termux-vibrate","termux-notification","termux-dialog","termux-sensor","termux-share","termux-open","termux-wifi-enable","termux-battery-status","termux-brightness","termux-sms-send"]},
+  {label:"Emoji Intent",keys:["⚡","❓","✅","❌","🧠","✍️","📦","📎","💡","🚀","🧩","📝","🔐","🧠","🛠️","⏳","📈","📉","📊","💾","📂","🔒","🔓","🕹️","🧱","🗝️","🧠","🧮","⚙️","💥","🌀","🔥","🌐","📍","📣","🪄","🎯","🧭","🔭","🔬","🧪","🧬","🧰","🔧","🗜️"]},
+  {label:"Licensing",keys:["LICENSE.txt","promptmeta.json","manifest.json","auto-sign","enforce()","sig()","verify()","revoke()","sbom.json","COPYING","NOTICE","PATENTS","MIT","GPL","Apache-2.0","UUID","ULID","GUID","Snowflake","K-Sort","license-check()","valid()","signed()","public.pem","private.key","sha256sum","md5sum","gpg --sign","openssl enc","base64","xxd","zlib","brotli","gzip","xz","tar.gz","*.zip","*.rar","*.7z","pkcs12","pem","csr","jwt","jsonwebtoken","checksum","authsig","sigchain"]},
+  {label:"Math + Unicode",keys:["∑","∫","≠","≈","≡","≥","≤","±","÷","×","∂","Δ","λ","π","θ","µ","Ω","α","β","ψ","φ","∞","∇","⊕","⊗","∃","∀","∈","∉","∅","∪","∩","⊆","⊂","⊇","⊃","∧","∨","¬","⇒","⇔","∴","∵","∠","⊥","∥","⊢","⊨","⊻"]},
+  {label:"DevOps + Git",keys:["git status","git add .","git commit","git push","git pull","git clone","git log","git diff","git reset","git revert","npm init","npm install","npm run dev","npm run build","npx create-next-app","vite create","eslint --fix","prettier --write","docker build","docker run","docker ps","docker exec","docker logs","docker rm","docker rmi","docker stop","docker compose","vercel","netlify deploy","flyctl deploy","gh auth","gh repo clone","gh pr create","gh issue list","gh release create","gh gist list","gh actions list","pip install","python3 -m venv","pytest","uvicorn","fastapi","flask run","poetry install"]},
+  {label:"JS + Regex",keys:["await","async","fetch","JSON.parse()","JSON.stringify()","let","const","var","import","export default","=> arrow","Promise",".then()",".catch()",".map()",".filter()",".reduce()","new","class","constructor","this","super","try","catch","finally","typeof","instanceof","nullish ??","?. optional","!!","Boolean()","parseInt()","parseFloat()","Object.keys()","Array.from()","RegExp()",".*","^","$","\d","\w","\s","[a-z]","[^0-9]","(group)","(?:noncap)","(?=lookahead)"]},
+  {label:"Navigation + Arrows",keys:["←","→","↑","↓","⌘+←","⌘+→","⌘+↑","⌘+↓","Shift+←","Shift+→","⌘+A","Home","End","PgUp","PgDn","Tab","Enter","Backspace","Delete","Esc","Ctrl+K","Ctrl+Z","Ctrl+Y","Ctrl+S","Ctrl+F","Alt+Tab","Ctrl+Alt+Del","Cmd+Shift+P","Cmd+P","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","Fn","Insert","Break","CapsLock"]},
+  {label:"Obfuscation + Encode",keys:["JSON escape","Base64 encode","Base64 decode","btoa()","atob()","encodeURIComponent","decodeURIComponent","hex","unicode escape","octal","binary","zlib","brotli","gzip","htmlspecialchars","htmlentities","AAencode","JJencode","JSFuck","ROT13","xor()","hexlify","utf8.encode()","String.fromCharCode()","charCodeAt()","eval()","Function()","new Function()","\u202e","\u200f","\u200b","zero-width","zwnj","zwj","rlo","lro","PDF injection","iframe srcdoc","script[src]","&#xXX;","&lt;script&gt;","\x41","\101","\u0041"]},
+  {label:"System Tools",keys:["htop","top","watch -n 1","iotop","dstat","strace","lsof","netstat -tulnp","ss -tunlp","ping -c 4","whoami","id","groups","env","printenv","ps aux","journalctl","dmesg","uptime","uname -a","lsblk","mount","df -h","du -sh","ip a","ip r","ifconfig","nmcli","ping google.com","curl ifconfig.me","whois google.com","dig","nslookup","traceroute","iptables -L","ufw status","systemctl status","systemctl restart","chmod","chown","adduser","passwd"]}
+];
+const layout = document.getElementById('layout');
+const search = document.getElementById('search');function render() { layout.innerHTML = ''; pages.forEach(({ label, keys }) => { const section = document.createElement('div'); section.className = 'col-span-full text-emerald-400 text-sm font-bold uppercase mt-4'; section.textContent = label; layout.appendChild(section); keys.forEach(k => { const btn = document.createElement('button'); btn.className = 'text-xs sm:text-sm bg-zinc-800 rounded p-2 border border-zinc-600 hover:bg-emerald-500 hover:text-black'; btn.textContent = k; btn.onclick = () => navigator.clipboard.writeText(k); layout.appendChild(btn); }); }); }
+
+search.addEventListener('input', e => { const q = e.target.value.toLowerCase(); document.querySelectorAll('#layout button').forEach(b => { b.style.display = b.textContent.toLowerCase().includes(q) ? 'inline-block' : 'none'; }); });
+
+render(); </script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en" class="bg-black text-white">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';" />
+    <title>Ξ‑Shroomtop420® v10 | Full Key Reference</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: monospace;
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        /* Toast Notification Styles */
+        #toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: #10B981; /* emerald-500 */
+            color: black;
+            border-radius: 5px;
+            font-size: 0.875rem; /* text-sm */
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        #toast.show {
+            opacity: 1;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #ffeb3b;
+            background-color: rgba(255, 235, 59, 0.2);
+        }
+        .highlighted {
+            outline: 2px solid yellow;
+            transition: outline 0.3s ease;
+        }
+    </style>
+</head>
+<body class="p-4">
+
+<h1 id="main-title" class="text-2xl text-emerald-400 font-bold text-center mb-4"></h1>
+<input id="search" placeholder="Search all keys..." class="w-full p-2 mb-4 rounded bg-zinc-900 text-sm sticky top-2 z-50" aria-label="Search all keys" />
+<div id="layout" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"></div>
+
+<div id="toast" role="status" aria-live="polite">Copied!</div>
+
+<script>
+// Data for keyboard layout pages and their keys
+const pages = [
+  {label:"PromptOps",keys:["/inject","/rewrite","/compress","/summarize","Ξ:","→","::","#prompt","'''","/refactor","/dream","/analyze","/flatten","/log","/expand","/optimize","/state","/version","/trace","/ask","/output","/todo","/resume","/notes","/fork","/goal","/scope","/summary","/context","/deploy","/plan","/export","/log","/compare","/eval","/history","/reduce","/flatmap","/inspect","/args","/script","/self","/recurse","/think","/show","/why","/how","/alt","/next"]},
+  {label:"Shell",keys:["ls","cd","cd ..","pwd","mkdir","touch","rm","rm -rf","cp","mv","chmod +x","chown","cat","less","tail -f","grep","find","locate","tree","stat","df -h","du -sh","tar -xvzf","zip","unzip","curl","wget","ping","traceroute","whoami","sudo","su","env","export","set","alias","source","history","clear","uptime","top","htop","kill","killall","ps aux","xargs","cut","awk","sed","tee"]},
+  {label:"Code Symbols",keys:["(",")","{","}","[","]","<",">","::",":=","=>","=","==","===","!=","!==","+","-","*","/","%","++","--","**","//","&","&&","|","||","!","~","^","<<",">>","?",":",";",",",".","...","`","'","\"", "#","@","$","_","->","::=","::=="]},
+  {label:"Numeric + Calc",keys:["0","1","2","3","4","5","6","7","8","9","∞","±","≠","≈","≥","≤","π","√","∑","∫","÷","×","/","%","+","-","e","mod","^","**",".5",".25",".75","⅓","⅔","¼","½","¾","⅛","⅜","⅝","⅞","log","ln","sin","cos","tan","rand","floor","ceil"]},
+  {label:"Markdown",keys:["#","##","###","####","---","**bold**","_italics_","~~strike~~","`code`","```block```",">","[text](url)","![img](src)","- ","* ","1. ","- [ ]","✓","↩","→","←","↑","↓","🔗","📎","📄","📦","📝","🧠","📌","📋","📚","📖","🧾","🗂️","📅","🖊️","📍","📑","🗒️","🧷","🖋️","📇"]},
+  {label:"Clipboard",keys:["⧉ paste","⧉ copy","UUIDv4()","SHA256()","LICENSE.txt","promptmeta.json","manifest.json",".shortcuts","README.txt","VERSION.txt","~/","/sdcard/","/data/data/","~/.zshrc","~/.bashrc","~/.gitconfig","/etc/passwd","/etc/hosts","/tmp/","cat .env","echo $PATH","chmod 755","ln -s","rsync -av","scp","ssh","curl -O","tail -n 50","logcat","top -m 10","termux-clipboard-get","termux-clipboard-set","termux-toast","termux-vibrate","termux-notification","termux-dialog","termux-sensor","termux-share","termux-open","termux-wifi-enable","termux-battery-status","termux-brightness","termux-sms-send"]},
+  {label:"Emoji Intent",keys:["⚡","❓","✅","❌","🧠","✍️","📦","📎","💡","🚀","🧩","📝","🔐","🧠","🛠️","⏳","📈","📉","📊","💾","📂","🔒","🔓","🕹️","🧱","🗝️","🧠","🧮","⚙️","💥","🌀","🔥","🌐","📍","📣","🪄","🎯","🧭","🔭","🔬","🧪","🧬","🧰","🔧","🗜️"]},
+  {label:"Licensing",keys:["LICENSE.txt","promptmeta.json","manifest.json","auto-sign","enforce()","sig()","verify()","revoke()","sbom.json","COPYING","NOTICE","PATENTS","MIT","GPL","Apache-2.0","UUID","ULID","GUID","Snowflake","K-Sort","license-check()","valid()","signed()","public.pem","private.key","sha256sum","md5sum","gpg --sign","openssl enc","base64","xxd","zlib","brotli","gzip","xz","tar.gz","*.zip","*.rar","*.7z","pkcs12","pem","csr","jwt","jsonwebtoken","checksum","authsig","sigchain"]},
+  {label:"Math + Unicode",keys:["∑","∫","≠","≈","≡","≥","≤","±","÷","×","∂","Δ","λ","π","θ","µ","Ω","α","β","ψ","φ","∞","∇","⊕","⊗","∃","∀","∈","∉","∅","∪","∩","⊆","⊂","⊇","⊃","∧","∨","¬","⇒","⇔","∴","∵","∠","⊥","∥","⊢","⊨","⊻"]},
+  {label:"DevOps + Git",keys:["git status","git add .","git commit","git push","git pull","git clone","git log","git diff","git reset","git revert","npm init","npm install","npm run dev","npm run build","npx create-next-app","vite create","eslint --fix","prettier --write","docker build","docker run","docker ps","docker exec","docker logs","docker rm","docker rmi","docker stop","docker compose","vercel","netlify deploy","flyctl deploy","gh auth","gh repo clone","gh pr create","gh issue list","gh release create","gh gist list","gh actions list","pip install","python3 -m venv","pytest","uvicorn","fastapi","flask run","poetry install"]},
+  {label:"JS + Regex",keys:["await","async","fetch","JSON.parse()","JSON.stringify()","let","const","var","import","export default","=> arrow","Promise",".then()",".catch()",".map()",".filter()",".reduce()","new","class","constructor","this","super","try","catch","finally","typeof","instanceof","nullish ??","?. optional","!!","Boolean()","parseInt()","parseFloat()","Object.keys()","Array.from()","RegExp()",".*","^","$","\\d","\\w","\\s","[a-z]","[^0-9]","(group)","(?:noncap)","(?=lookahead)"]},
+  {label:"Navigation + Arrows",keys:["←","→","↑","↓","⌘+←","⌘+→","⌘+↑","⌘+↓","Shift+←","Shift+→","⌘+A","Home","End","PgUp","PgDn","Tab","Enter","Backspace","Delete","Esc","Ctrl+K","Ctrl+Z","Ctrl+Y","Ctrl+S","Ctrl+F","Alt+Tab","Ctrl+Alt+Del","Cmd+Shift+P","Cmd+P","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","Fn","Insert","Break","CapsLock"]},
+  {label:"Obfuscation + Encode",keys:["JSON escape","Base64 encode","Base64 decode","btoa()","atob()","encodeURIComponent","decodeURIComponent","hex","unicode escape","octal","binary","zlib","brotli","gzip","htmlspecialchars","htmlentities","AAencode","JJencode","JSFuck","ROT13","xor()","hexlify","utf8.encode()","String.fromCharCode()","charCodeAt()","eval()","Function()","new Function()","\u202e","\u200f","\u200b","zero-width","zwnj","zwj","rlo","lro","PDF injection","iframe srcdoc","script[src]","&#xXX;","<script>","\\x41","\\101","\\u0041"]},
+  {label:"System Tools",keys:["htop","top","watch -n 1","iotop","dstat","strace","lsof","netstat -tulnp","ss -tunlp","ping -c 4","whoami","id","groups","env","printenv","ps aux","journalctl","dmesg","uptime","uname -a","lsblk","mount","df -h","du -sh","ip a","ip r","ifconfig","nmcli","ping google.com","curl ifconfig.me","whois google.com","dig","nslookup","traceroute","iptables -L","ufw status","systemctl status","systemctl restart","chmod","chown","adduser","passwd"]}
+];
+
+// DOM element references
+const layoutContainer = document.getElementById('layout');
+const searchInput = document.getElementById('search');
+const mainTitle = document.getElementById('main-title');
+const toastElement = document.getElementById('toast');
+let toastTimeout; // To manage the toast display duration
+
+/**
+ * Updates the main title with the number of layers.
+ */
+function updateMainTitle() {
+    mainTitle.textContent = `Ξ‑Shroomtop420® ${pages.length}‑Layer Key Layout`;
+}
+
+/**
+ * Shows a toast notification message.
+ * @param {string} message - The message to display.
+ */
+function showToast(message = "Copied!") {
+    if (toastTimeout) {
+        clearTimeout(toastTimeout); // Clear existing timeout if any
+    }
+    toastElement.textContent = message;
+    toastElement.classList.add('show');
+    toastTimeout = setTimeout(() => {
+        toastElement.classList.remove('show');
+    }, 1500); // Show toast for 1.5 seconds
+}
+
+/**
+ * Highlights the text based on the query.
+ * @param {string} text - The original text.
+ * @param {string} query - The search query.
+ * @returns {DocumentFragment|Text} - A fragment with highlighted text or a text node.
+ */
+function highlightText(text, query) {
+    if (!query) return document.createTextNode(text);
+    const regex = new RegExp(query, 'gi');
+    const parts = text.split(regex);
+    const matches = text.match(regex);
+    if (!matches) return document.createTextNode(text);
+    const fragment = document.createDocumentFragment();
+    parts.forEach((part, index) => {
+        fragment.appendChild(document.createTextNode(part));
+        if (index < matches.length) {
+            const span = document.createElement('span');
+            span.className = 'highlight';
+            span.textContent = matches[index];
+            fragment.appendChild(span);
+        }
+    });
+    return fragment;
+}
+
+/**
+ * Renders the keyboard layout onto the page.
+ */
+function renderLayout() {
+    layoutContainer.innerHTML = ''; // Clear previous layout
+
+    pages.forEach(({ label, keys }) => {
+        // Create section header
+        const section = document.createElement('div');
+        section.className = 'col-span-full text-emerald-400 text-sm font-bold uppercase mt-4 mb-1';
+        section.textContent = label;
+        layoutContainer.appendChild(section);
+
+        keys.forEach((keyText, keyIndex) => {
+            const button = document.createElement('button');
+            button.className = 'key-button text-xs sm:text-sm bg-zinc-800 rounded p-2 border border-zinc-600 hover:bg-emerald-500 hover:text-black focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-opacity-75 transition-all duration-150 ease-in-out';
+            const id = `${label.toLowerCase().replace(/[^a-z0-9]/gi, '-')}-${keyIndex}`;
+            button.id = id;
+            button.dataset.page = label;
+            button.textContent = keyText;
+            button.setAttribute('aria-label', `Copy ${keyText}`);
+            button.onclick = () => {
+                const keyText = button.textContent;
+                const page = button.dataset.page;
+                navigator.clipboard.writeText(keyText).then(() => {
+                    showToast(`Copied: ${keyText} (${page})`);
+                }).catch(err => {
+                    showToast('Copy failed!');
+                });
+            };
+            layoutContainer.appendChild(button);
+        });
+    });
+
+    // Handle URL hash for direct linking
+    if (window.location.hash) {
+        const element = document.querySelector(window.location.hash);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+            element.classList.add('highlighted');
+            setTimeout(() => element.classList.remove('highlighted'), 2000);
+        }
+    }
+}
+
+// Search functionality
+searchInput.addEventListener('input', event => {
+    const query = event.target.value.trim();
+    document.querySelectorAll('.key-button').forEach(button => {
+        const originalText = button.textContent;
+        const lowerText = originalText.toLowerCase();
+        const lowerQuery = query.toLowerCase();
+        const matches = lowerText.includes(lowerQuery);
+        button.style.display = query ? (matches ? 'inline-block' : 'none') : 'inline-block';
+        button.innerHTML = '';
+        button.appendChild(highlightText(originalText, query));
+    });
+
+    // Hide section labels if all keys are hidden
+    document.querySelectorAll('.col-span-full').forEach(sectionLabel => {
+        let allKeysHidden = true;
+        let nextSibling = sectionLabel.nextElementSibling;
+        while (nextSibling && !nextSibling.classList.contains('col-span-full')) {
+            if (nextSibling.style.display !== 'none') {
+                allKeysHidden = false;
+                break;
+            }
+            nextSibling = nextSibling.nextElementSibling;
+        }
+        sectionLabel.style.display = allKeysHidden && query ? 'none' : 'block';
+    });
+});
+
+// Initial render of the layout and title
+updateMainTitle();
+renderLayout();
+
+</script>
+
+</body>
+</html>
